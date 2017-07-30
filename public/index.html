@@ -7,14 +7,36 @@
 </head>
 
 <body>
-    <div id="content-area">
-        If you see this, the onready event didn't fire.
+    <div id="slideshow-control">
+        <select id="slideshow-bundle-selector">
+        
+        </select>
+        
+    </div>
+    <div id="slideshow-presenter">
+        <img src="/api/defaults/placeholder">
     </div>
 </body>
 
 <script>
     $(document).ready(function(){
-        $("#content-area").text("If you see this, the onready event fired correctly.");
+            
+        // populate the slideshow combo.
+        $.ajax({url: "/api/bundles", success: function(data){
+            var bundles = JSON.parse(data);
+
+            for(var i=0; i<=bundles.length-1; i++) {
+                var bundleName = bundles[i];
+                console.log(bundleName);
+                
+                $("#slideshow-bundle-selector")
+                    .append($('<option>', {"value": bundleName, 
+                                           "text": bundleName}));
+            }
+
+        }});
+        
+
     })
 </script>
 
