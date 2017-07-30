@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+<script type="text/javascript" src="js/sabretooth.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="css/styles.css" />
+</head>
+
+<body>
+    <div id="content-area">
+        If you see this, the onready event didn't fire.
+    </div>
+</body>
+
+<script>
+    $(document).ready(function(){
+        $("#content-area").text("If you see this, the onready event fired correctly.");
+    })
+</script>
+
+</html>
