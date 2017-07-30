@@ -41,12 +41,17 @@
 
             $.ajax({url: "/api/bundles/" + bundle_name , success: function(data){
                 var bundle_items = JSON.parse(data);
-                
+                var image_src = null;
+
                 // grab the first image and push to the image.
                 if(bundle_items.length > 0) {
-                    $("#slideshow-current-image")
-                      .attr('src', "/api/bundles/" + bundle_name + "/" + bundle_items[0]);
+                    image_src = "/api/bundles/" + bundle_name + "/" + bundle_items[0];
+                } else {
+                    image_src = "/api/defaults/placeholder";
                 }
+
+                $("#slideshow-current-image")
+                    .attr('src', image_src);
             }}) // #slideshow-bundle-selector.change
         }) 
 
