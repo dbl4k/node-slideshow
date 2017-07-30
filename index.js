@@ -74,8 +74,6 @@ app.get('/api/defaults/placeholder', function (req, res) {
   res.send(content);
 })
 
-
-
 app.use(express.static('public'));
 
 app.listen(listen_port, function () {
