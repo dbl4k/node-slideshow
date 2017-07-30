@@ -4,3 +4,7 @@ body {
     font-size: 30pt;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+img#slideshow-current-image {
+    height:100%;
+}
