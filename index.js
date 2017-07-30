@@ -9,6 +9,7 @@ var app = express();
 
 var app_root = path.resolve(".");
 var listen_port = 3000;
+var defaults_dir = app_root + '\\resources\\defaults';
 var bundles_dir = app_root + '\\resources\\bundles';
 var content_type_json = 'application/json';
 
@@ -60,6 +61,14 @@ app.get('/api/bundles/:bundle_name/:item_name', function (req, res) {
   var content = fs.readFileSync(item_path);
 
   // HACK: alter headers o show in browser rather than starting a download.
+  res.set("Content-Disposition", "inline;");
+  res.set("Content-Type", "image/png;");
+  res.send(content);
+})
+
+app.get('/api/defaults/placeholder', function (req, res) {
+  var placeholder_path = defaults_dir + "\\" + "placeholder.png";
+  var content = fs.readFileSync(placeholder_path);
   res.set("Content-Disposition", "inline;");
   res.set("Content-Type", "image/png;");
   res.send(content);
