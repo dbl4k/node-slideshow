@@ -32,7 +32,7 @@ app.get('/api/bundles/:bundle_name', function (req, res) {
   var files = [];
 
   // clean inputs
-  var bundle_name = helpers.getNonTraversingFileName(req.params.bundle_name);
+  var bundle_name = helpers.removeRiskyChars(req.params.bundle_name);
 
   var bundle_dir = bundles_dir + "\\" + bundle_name;
 
@@ -52,8 +52,8 @@ app.get('/api/bundles/:bundle_name/:item_name', function (req, res) {
   var files = [];
 
   // clean inputs
-  var bundle_name = helpers.getNonTraversingFileName(req.params.bundle_name);
-  var item_name = helpers.getNonTraversingFileName(req.params.item_name);
+  var bundle_name = helpers.removeRiskyChars(req.params.bundle_name);
+  var item_name = helpers.removeRiskyChars(req.params.item_name);
 
   var item_path = bundles_dir + "\\" + bundle_name + "\\" + item_name;
 
