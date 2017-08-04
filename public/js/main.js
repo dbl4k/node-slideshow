@@ -1,6 +1,7 @@
  $(document).ready(function(){
 
     var current_bundle_imageurls = null;
+    var current_item_index = 0;
               
     // populate the slideshow combo.
     $.ajax({url: "/api/bundles", success: function(data){
@@ -24,7 +25,7 @@
 
         $.ajax({url: "/api/bundles/" + bundle_name , success: function(data){
             var bundle_items = JSON.parse(data);
-            var image_src = null;
+            current_item_index = 0;
 
             // grab the first image and push to the image.
             if(bundle_items.length > 0) {
@@ -37,7 +38,7 @@
             }
 
             $("#slideshow-current-image")
-                .attr('src', current_bundle_imageurls[0]);
+                .attr('src', current_bundle_imageurls[current_item_index]);
         }}) // #slideshow-bundle-selector.change
     }) 
 
