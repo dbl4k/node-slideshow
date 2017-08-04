@@ -52,6 +52,8 @@ app.get('/api/bundles/:bundle_name', function (req, res) {
 app.get('/api/bundles/:bundle_name/:item_name', function (req, res) {
   var files = [];
 
+  console.log(req.ip + " - " + req.url);
+
   // clean inputs
   var bundle_name = helpers.removeRiskyChars(req.params.bundle_name);
   var item_name = helpers.removeRiskyChars(req.params.item_name);
