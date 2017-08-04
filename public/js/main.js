@@ -3,7 +3,7 @@
     var current_bundle_imageurls = null;
     var current_item_index = 0;
     var is_paused = false;
-    var show_interval_ms = 1000;
+    var show_interval_ms = 3000;
               
     // populate the slideshow combo.
     $.ajax({url: "/api/bundles", success: function(data){
@@ -46,5 +46,23 @@
             is_paused = false;
         }}) // #slideshow-bundle-selector.change
     }) 
+
+    // increment index and load image every n seconds.
+    setInterval(function(){ 
+        if((!is_paused) && 
+            current_bundle_imageurls && 
+            current_bundle_imageurls.length > 1) {
+
+            // reset increment if needed
+            if(current_item_index >= current_bundle_imageurls.length){
+                current_item_index = 0;
+            }
+
+            console.log('increment ' + current_item_index);
+
+            current_item_index++;
+        }
+    }, show_interval_ms);
+
 
 }) // document.onready
