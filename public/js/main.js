@@ -29,17 +29,15 @@
             // grab the first image and push to the image.
             if(bundle_items.length > 0) {
                 for(var i=0; i<=bundle_items.length-1; i++) {
-                    current_bundle_imageurls.push("/api/bundles/" 
-                                                  + bundle_name 
-                                                  + "/" 
-                                                  + bundle_items[i]);
+                    current_bundle_imageurls
+                    .push("/api/bundles/"+ bundle_name + "/" + bundle_items[i]);
                 }
             } else {
-                current_bundle_imageurls = "/api/defaults/placeholder";
+                current_bundle_imageurls.push("/api/defaults/placeholder");
             }
 
             $("#slideshow-current-image")
-                .attr('src', bundle_items[0]);
+                .attr('src', current_bundle_imageurls[0]);
         }}) // #slideshow-bundle-selector.change
     }) 
 
