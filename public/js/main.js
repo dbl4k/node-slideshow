@@ -2,6 +2,7 @@
 
     var current_bundle_imageurls = null;
     var current_item_index = 0;
+    var is_paused = false;
               
     // populate the slideshow combo.
     $.ajax({url: "/api/bundles", success: function(data){
@@ -19,6 +20,7 @@
     
     // load first image on combo change
     $("#slideshow-bundle-selector").change(function(c){
+        is_paused = true;
         var bundle_name = $("#slideshow-bundle-selector").val();
         console.log(bundle_name);
         current_bundle_imageurls = [];
@@ -39,6 +41,8 @@
 
             $("#slideshow-current-image")
                 .attr('src', current_bundle_imageurls[current_item_index]);
+
+            is_paused = false;
         }}) // #slideshow-bundle-selector.change
     }) 
 
