@@ -3,6 +3,7 @@
     var current_bundle_imageurls = null;
     var current_item_index = 0;
     var is_paused = false;
+    var show_interval_ms = 1000;
               
     // populate the slideshow combo.
     $.ajax({url: "/api/bundles", success: function(data){
