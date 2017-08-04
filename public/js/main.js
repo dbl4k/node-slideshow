@@ -58,7 +58,8 @@
                 current_item_index = 0;
             }
 
-            console.log('increment ' + current_item_index);
+            $("#slideshow-current-image")
+                .attr('src', current_bundle_imageurls[current_item_index]);
 
             current_item_index++;
         }
