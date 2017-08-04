@@ -65,5 +65,4 @@
         }
     }, show_interval_ms);
 
-
 }) // document.onready
