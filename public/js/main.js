@@ -1,4 +1,6 @@
  $(document).ready(function(){
+
+    var current_bundle_imageurls = null;
               
     // populate the slideshow combo.
     $.ajax({url: "/api/bundles", success: function(data){
@@ -18,6 +20,7 @@
     $("#slideshow-bundle-selector").change(function(c){
         var bundle_name = $("#slideshow-bundle-selector").val();
         console.log(bundle_name);
+        current_bundle_imageurls = [];
 
         $.ajax({url: "/api/bundles/" + bundle_name , success: function(data){
             var bundle_items = JSON.parse(data);
@@ -25,13 +28,18 @@
 
             // grab the first image and push to the image.
             if(bundle_items.length > 0) {
-                image_src = "/api/bundles/" + bundle_name + "/" + bundle_items[0];
+                for(var i=0; i<=bundle_items.length-1; i++) {
+                    current_bundle_imageurls.push("/api/bundles/" 
+                                                  + bundle_name 
+                                                  + "/" 
+                                                  + bundle_items[i]);
+                }
             } else {
-                image_src = "/api/defaults/placeholder";
+                current_bundle_imageurls = "/api/defaults/placeholder";
             }
 
             $("#slideshow-current-image")
-                .attr('src', image_src);
+                .attr('src', bundle_items[0]);
         }}) // #slideshow-bundle-selector.change
     }) 
 
