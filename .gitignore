@@ -4,4 +4,4 @@ bower_components/
 *.log
 !bower_components/bower.json
 !bower_components/.bower.json
-resources/bundles/p_*
+resources/bundles/_*
