@@ -1,9 +1,16 @@
  $(document).ready(function(){
 
+    var hnd_interval = null;
     var current_bundle_imageurls = null;
     var current_item_index = 0;
     var is_paused = false;
     var show_interval_ms = 3000;
+
+    // attach an event handler to the slideshow-display-interval change
+    $("#slideshow-display-interval").change(function(c){
+        show_interval_ms = $("#slideshow-display-interval").val();
+        hnd_interval = restartInterval(hnd_interval, show_interval_ms);
+    });
               
     // populate the slideshow combo.
     $.ajax({url: "/api/bundles", success: function(data){
@@ -48,21 +55,35 @@
     }) 
 
     // increment index and load image every n seconds.
-    setInterval(function(){ 
-        if((!is_paused) && 
-            current_bundle_imageurls && 
-            current_bundle_imageurls.length > 1) {
+    var startInterval = function(interval_time){
+        var handle = 
+        setInterval(function(){ 
+            if((!is_paused) && 
+                current_bundle_imageurls && 
+                current_bundle_imageurls.length > 1) {
 
-            // reset increment if needed
-            if(current_item_index >= current_bundle_imageurls.length){
-                current_item_index = 0;
+                // reset increment if needed
+                if(current_item_index >= current_bundle_imageurls.length){
+                    current_item_index = 0;
+                }
+
+                $("#slideshow-current-image")
+                    .attr('src', current_bundle_imageurls[current_item_index]);
+
+                current_item_index++;
             }
-
-            $("#slideshow-current-image")
-                .attr('src', current_bundle_imageurls[current_item_index]);
-
-            current_item_index++;
+        }, interval_time);
+        
+        return handle;
+    }
+    var restartInterval = function(interval_ref, interval_time){
+        if(interval_ref){
+            clearInterval(interval_ref);
         }
-    }, show_interval_ms);
+        interval_ref = startInterval(interval_time);
+        return interval_ref;
+    }
+
+    hnd_interval = restartInterval(hnd_interval, show_interval_ms);
 
 }) // document.onready
